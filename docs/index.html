@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chipotle FP&amp;A Model | Ajay Patil</title>
+<meta name="description" content="Driver-based 3-statement model, FY2025 variance analysis and 2026–2027 Base/Bull/Bear forecast for Chipotle Mexican Grill (CMG), built from the FY2025 Form 10-K.">
+<meta property="og:title" content="Chipotle (CMG) FP&amp;A Case Study | Ajay Patil">
+<meta property="og:description" content="3-statement model, variance bridge, scenario engine, Power BI dashboard and FP&amp;A memo.">
+<meta property="og:image" content="img/slide-01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#A6150F;--red-dk:#7E100B;--dark:#2B1B13;--cream:#FAF7F2;--panel:#F2E9E0;--muted:#7D7168;--rose:#D98A85;--green:#3E6B4A;--line:#E4DAD0;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--dark);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+nav .brand{font-weight:800;letter-spacing:.02em;font-size:15px;text-decoration:none;white-space:nowrap}
+nav .brand b{color:var(--red)}
+nav ul{display:flex;gap:22px;list-style:none;font-size:14px;font-weight:600;color:var(--muted)}
+nav ul a{text-decoration:none} nav ul a:hover{color:var(--red)}
+@media(max-width:760px){nav ul{display:none}}
+/* hero */
+.hero{background:var(--red);color:#fff;padding:84px 0 96px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.06)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.kicker i{display:inline-block;width:40px;height:2px;background:currentColor;opacity:.6}
+.hero h1{font-size:clamp(40px,6.4vw,72px);line-height:1.03;font-weight:800;letter-spacing:-.03em;margin-top:26px;max-width:880px}
+.hero h1 em{font-style:normal;color:#F6C9C4}
+.hero p.lead{font-size:clamp(17px,2vw,21px);max-width:760px;margin-top:22px;color:rgba(255,255,255,.9)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.btn.primary{background:#fff;color:var(--red)}
+.btn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn svg{width:18px;height:18px}
+.byline{margin-top:30px;font-size:14px;color:rgba(255,255,255,.8)}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-48px;position:relative;z-index:2}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;box-shadow:0 10px 30px rgba(43,27,19,.06)}
+.kpi b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em}
+.kpi span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+/* sections */
+section{padding:84px 0 0}
+.sec-k{color:var(--muted)} .sec-k b{color:var(--red)}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.1;font-weight:800;letter-spacing:-.025em;margin-top:14px}
+h2 em{font-style:normal;color:var(--red)}
+.sub{color:var(--muted);font-size:18px;margin-top:10px;max-width:760px}
+/* findings */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px}
+.tile .big{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.tile h3{font-size:18px;margin-top:12px}
+.tile p{color:var(--muted);font-size:15.5px;margin-top:6px}
+.tile.red{background:var(--red);border-color:var(--red);color:#fff} .tile.red p{color:rgba(255,255,255,.85)}
+.tile.dark{background:var(--dark);border-color:var(--dark);color:#fff} .tile.dark p{color:rgba(255,255,255,.75)}
+.tile.red .big,.tile.dark .big{color:#fff}
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
+@media(max-width:760px){.gallery{grid-template-columns:1fr}}
+figure{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:zoom-in;transition:box-shadow .15s ease}
+figure:hover{box-shadow:0 10px 30px rgba(43,27,19,.1)}
+figure img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line)}
+figcaption{padding:16px 20px 18px;font-size:15px} figcaption b{display:block;font-size:16px}
+figcaption span{color:var(--muted)}
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(20,12,8,.86);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
+#lb.on{display:flex} #lb img{max-height:94vh;max-width:94vw;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+/* method */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start;margin-top:34px}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 22px 56px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps h4{font-size:18px} .steps p{color:var(--muted);font-size:15.5px;margin-top:4px}
+/* table */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:15px}
+.tbl th{background:var(--red);color:#fff;text-align:left;padding:13px 16px;font-weight:700}
+.tbl td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
+.tbl td.v{font-weight:800;color:var(--red);white-space:nowrap}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.tg{background:#E3EDE5;color:var(--green)} .ta{background:#F3E6D3;color:#8A6232}
+.tbl-wrap{overflow-x:auto}
+/* downloads */
+.dl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+@media(max-width:900px){.dl{grid-template-columns:repeat(2,1fr)}} @media(max-width:520px){.dl{grid-template-columns:1fr}}
+.dl a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:transform .15s ease,box-shadow .15s ease}
+.dl a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(43,27,19,.08)}
+.dl .ext{display:inline-block;align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.06em;padding:5px 10px;border-radius:8px;background:var(--panel);color:var(--red)}
+.dl b{font-size:17px} .dl span{color:var(--muted);font-size:14.5px} .dl em{font-style:normal;font-weight:700;color:var(--red);font-size:14px;margin-top:auto}
+/* skills + footer */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips span{background:var(--panel);border-radius:30px;padding:9px 18px;font-weight:600;font-size:15px}
+.about{background:var(--dark);color:#fff;border-radius:24px;padding:44px 40px;margin-top:84px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+@media(max-width:760px){.about{grid-template-columns:1fr;padding:32px 26px}}
+.about h3{font-size:30px;letter-spacing:-.02em} .about p{color:rgba(255,255,255,.78);margin-top:10px}
+.about .btn.primary{color:var(--dark)}
+footer{padding:44px 0 56px;color:var(--muted);font-size:13.5px}
+footer p+p{margin-top:8px}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="brand" href="#top"><b>CMG</b> · FP&amp;A Case Study</a>
+<ul><li><a href="#findings">Findings</a></li><li><a href="#visuals">Visuals</a></li><li><a href="#model">Model</a></li><li><a href="#assumptions">Assumptions</a></li><li><a href="#downloads">Downloads</a></li></ul></div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<div class="kicker">Chipotle Mexican Grill <i></i> NYSE: CMG</div>
+<h1>Driver-Based 3&#8209;Statement Model <em>&amp; FP&amp;A Case Study</em></h1>
+<p class="lead">A fully linked income statement, balance sheet and cash flow model built by hand from Chipotle's FY2025 Form 10-K, with a FY2025 budget-vs-actual variance bridge, a 2026–2027 forecast and a one-switch Base / Bull / Bear scenario engine.</p>
+<div class="btns">
+<a class="btn primary" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download the Excel model</a>
+<a class="btn ghost" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Case_Study_Ajay_Patil.pdf">Case study (PDF)</a>
+<a class="btn ghost" href="https://github.com/ajaaypatil0108/chipotle-fpa-model">View on GitHub</a>
+</div>
+<p class="byline">Ajay Patil · MS Finance, The University of Texas at Dallas</p>
+</div></header>
+
+<div class="wrap">
+<div class="kpis">
+<div class="kpi"><b>$11.93B</b><span>FY2025 revenue (+5.4%)</span></div>
+<div class="kpi"><b>$1.54B</b><span>FY2025 net income</span></div>
+<div class="kpi"><b>16.2%</b><span>FY2025 operating margin</span></div>
+<div class="kpi"><b>$14.38B</b><span>2027E revenue, Base case</span></div>
+</div>
+
+<section id="findings">
+<div class="kicker sec-k"><b>01</b><i></i>Key findings</div>
+<h2>The growth engine held. <em>Sales per restaurant didn't.</em></h2>
+<p class="sub">Chipotle opened more restaurants than planned in 2025 but still missed a budget built from its February 2025 guidance.</p>
+<div class="grid2">
+<div class="tile red"><div class="big">−$828M</div><h3>FY2025 revenue below budget (−6.5%)</h3><p>Volume added $7M; comparable sales (−1.7% vs. +4.0% budgeted) cost $699M; other per-restaurant effects cost $135M.</p></div>
+<div class="tile"><div class="big" style="color:var(--green)">16.2%</div><h3>Operating margin held</h3><p>Only 27 bps below the 16.5% budget. Net income of $1.54B missed by $70M (−4.3%), helped by a 23.6% tax rate vs. 26% budgeted.</p></div>
+<div class="tile"><div class="big" style="color:var(--red)">$14.38B</div><h3>2027E revenue, Base case</h3><p>About 8% unit growth a year, flat comparable sales in 2026 and +3% in 2027. Net income reaches $1.75B.</p></div>
+<div class="tile dark"><div class="big">1.7×</div><h3>2025 buybacks vs. free cash flow</h3><p>$2.43B repurchased against $1.45B of free cash flow; cash plus investments fell from $2.29B to $1.25B.</p></div>
+</div>
+</section>
+
+<section id="visuals">
+<div class="kicker sec-k"><b>02</b><i></i>Visual walkthrough</div>
+<h2>The analysis, slide by slide</h2>
+<p class="sub">Click any chart to enlarge it. All figures come from the Excel model.</p>
+<div class="gallery">
+<figure><img src="img/slide-05.png" alt="FY2025 revenue bridge from budget to actual" loading="lazy"><figcaption><b>FY2025 revenue bridge</b><span>Where the $828M miss came from: volume vs. comparable sales vs. other effects.</span></figcaption></figure>
+<figure><img src="img/slide-04.png" alt="Revenue, restaurant count and operating margin 2023 to 2027" loading="lazy"><figcaption><b>Revenue climbs to $14.4B by 2027</b><span>Revenue, restaurant count and operating margin, 2023A–2027E.</span></figcaption></figure>
+<figure><img src="img/slide-07.png" alt="Bear, Base and Bull scenario drivers and outcomes" loading="lazy"><figcaption><b>One switch, three outcomes</b><span>Scenario drivers and the resulting revenue and net income paths.</span></figcaption></figure>
+<figure><img src="img/slide-08.png" alt="Net income, free cash flow and buybacks" loading="lazy"><figcaption><b>Buybacks vs. free cash flow</b><span>2025 repurchases ran at 1.7× free cash flow.</span></figcaption></figure>
+<figure><img src="img/slide-09.png" alt="Sensitivity of 2027 net income" loading="lazy"><figcaption><b>Risks and sensitivities</b><span>Bear to Bull spans a $699M range in 2027 net income.</span></figcaption></figure>
+<figure><img src="img/slide-06.png" alt="FY2025 actual as a percent of budget" loading="lazy"><figcaption><b>Budget vs. actual</b><span>Revenue, operating income and net income as a % of budget.</span></figcaption></figure>
+</div>
+</section>
+
+<section id="model">
+<div class="kicker sec-k"><b>03</b><i></i>How the model works</div>
+<h2>One driver tree, three linked statements</h2>
+<div class="split">
+<ol class="steps">
+<li><h4>Actuals from the 10-K</h4><p>FY2023–FY2025 income statement, balance sheet, cash flow and restaurant counts, transcribed from Chipotle's FY2025 Form 10-K.</p></li>
+<li><h4>Driver-based revenue</h4><p>Revenue = average restaurants × revenue per restaurant, which grows at the comparable-sales rate. Costs are modeled as a % of revenue.</p></li>
+<li><h4>Fully linked statements</h4><p>Net income, capex, buybacks and working capital flow through an indirect-method cash flow; cash is the balancing item. The balance check is zero in every year and scenario.</p></li>
+<li><h4>Scenario switch</h4><p>One cell flips Base / Bull / Bear and re-runs openings, comparable sales, cost ratios, tax rate and buybacks across 2026–2027.</p></li>
+<li><h4>Variance and reporting</h4><p>A budget-vs-actual bridge for FY2025, a Power BI dashboard (8 DAX measures) and a written FP&amp;A memo.</p></li>
+</ol>
+<figure><img src="img/slide-03.png" alt="Driver tree of the model" loading="lazy"><figcaption><b>Driver tree</b><span>FY2025 actuals shown.</span></figcaption></figure>
+</div>
+</section>
+
+<section id="assumptions">
+<div class="kicker sec-k"><b>04</b><i></i>Assumptions</div>
+<h2>Every input has a source</h2>
+<p class="sub">Base case. Guidance = tied to Chipotle's published outlook; my assumption = my own estimate.</p>
+<div class="tbl-wrap"><table class="tbl">
+<tr><th>Input</th><th>Base</th><th>Basis</th><th>Type</th></tr>
+<tr><td>2026 new openings</td><td class="v">345</td><td>Feb 2026 guidance: 350–370 incl. 10–15 international partner-operated</td><td><span class="tag tg">GUIDANCE</span></td></tr>
+<tr><td>2026 comparable sales</td><td class="v">0%</td><td>Feb 2026 guidance: "about flat"</td><td><span class="tag tg">GUIDANCE</span></td></tr>
+<tr><td>Tax rate</td><td class="v">25%</td><td>Midpoint of 24–26% guidance before discrete items</td><td><span class="tag tg">GUIDANCE</span></td></tr>
+<tr><td>2027 openings / comparable sales</td><td class="v">360 / +3%</td><td>Continued ~8% unit growth; recovery after a flat 2026</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
+<tr><td>Cost ratios</td><td class="v">83.5%</td><td>Food, labor, occupancy, other, G&amp;A and D&amp;A as % of revenue, at or slightly above 2025</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
+<tr><td>Capex</td><td class="v">$1.5M</td><td>Per new restaurant, plus $290M a year for existing restaurants and corporate</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
+<tr><td>Buybacks</td><td class="v">$1.3B / yr</td><td>Policy input; cash is the balancing item</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
+<tr><td>FY2025 budget</td><td class="v">330 · +4.0%</td><td>Openings and comparable sales from Feb 2025 guidance; 26% tax (guidance midpoint); 16.5% margin is my assumption</td><td><span class="tag tg">GUIDANCE</span> <span class="tag ta">+ MINE</span></td></tr>
+</table></div>
+<p class="sub" style="font-size:15px">Simplifications: operating leases, investments and other long-term items held at 2025 levels; stock-based compensation flat; share count and EPS not modeled.</p>
+</section>
+
+<section id="downloads">
+<div class="kicker sec-k"><b>05</b><i></i>Downloads</div>
+<h2>Everything in one place</h2>
+<div class="dl">
+<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><span class="ext">XLSX</span><b>Excel model</b><span>Historicals, assumptions, linked model, variance and Power BI data tabs.</span><em>Download →</em></a>
+<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/powerbi/Chipotle_FPA_Dashboard.pbix"><span class="ext">PBIX</span><b>Power BI dashboard</b><span>KPI cards and trend charts with 8 DAX measures. Opens in Power BI Desktop.</span><em>Download →</em></a>
+<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Case_Study_Ajay_Patil.pdf"><span class="ext">PDF</span><b>Case study deck</b><span>11-page visual walkthrough of findings, forecast and risks.</span><em>Download →</em></a>
+<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Memo.pdf"><span class="ext">PDF</span><b>FP&amp;A memo</b><span>Written variance review, forecast, assumptions and sensitivities.</span><em>Download →</em></a>
+</div>
+<div class="chips"><span>FP&amp;A</span><span>3-Statement Modeling</span><span>Variance Analysis</span><span>Scenario &amp; Sensitivity Analysis</span><span>Forecasting</span><span>Excel</span><span>Power BI</span><span>DAX</span><span>Financial Storytelling</span></div>
+</section>
+
+<div class="about">
+<div><h3>Ajay Patil</h3><p>MS Finance (STEM) at The University of Texas at Dallas, graduating December 2026. Interested in FP&amp;A and corporate finance roles.</p></div>
+<div><a class="btn primary" href="https://github.com/ajaaypatil0108/chipotle-fpa-model">Explore the repository</a></div>
+</div>
+
+<footer>
+<p>Sources: Chipotle Mexican Grill <a href="https://www.sec.gov/Archives/edgar/data/1058090/000105809026000009/cmg-20251231.htm">FY2025 Form 10-K</a>; <a href="https://newsroom.chipotle.com/2026-02-03-CHIPOTLE-ANNOUNCES-FOURTH-QUARTER-AND-FULL-YEAR-2025-RESULTS">Q4 and full year 2025 results and 2026 outlook</a> (Feb 3, 2026); <a href="https://www.sec.gov/Archives/edgar/data/1058090/000105809025000008/cmg-20250204xex991.htm">2025 outlook, Form 8-K exhibit 99.1</a> (Feb 4, 2025).</p>
+<p>Independent analysis of public information for educational purposes; not investment advice and not affiliated with Chipotle. Forecasts and the FY2025 budget are the author's own estimates.</p>
+</footer>
+</div>
+
+<div id="lb" aria-hidden="true"><img alt=""></div>
+<script>
+const lb=document.getElementById('lb'),li=lb.querySelector('img');
+document.querySelectorAll('figure img').forEach(i=>i.parentElement.addEventListener('click',()=>{li.src=i.src;li.alt=i.alt;lb.classList.add('on')}));
+lb.addEventListener('click',()=>lb.classList.remove('on'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+</script>
+</body>
+</html>
