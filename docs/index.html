@@ -3,125 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0E0E10">
 <title>Chipotle FP&amp;A Model | Ajay Patil</title>
 <meta name="description" content="Driver-based 3-statement model, FY2025 variance analysis and 2026–2027 Base/Bull/Bear forecast for Chipotle Mexican Grill (CMG), built from the FY2025 Form 10-K.">
+<meta name="author" content="Ajay Patil">
 <meta property="og:title" content="Chipotle (CMG) FP&amp;A Case Study | Ajay Patil">
 <meta property="og:description" content="3-statement model, variance bridge, scenario engine, Power BI dashboard and FP&amp;A memo.">
-<meta property="og:image" content="https://ajaaypatil0108.github.io/chipotle-fpa-model/img/slide-01.png">
+<meta property="og:image" content="https://ajaaypatil0108.github.io/chipotle-fpa-model/img/og.png">
 <meta property="og:url" content="https://ajaaypatil0108.github.io/chipotle-fpa-model/">
 <meta property="og:type" content="website">
-<meta name="author" content="Ajay Patil">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--red:#A6150F;--red-dk:#7E100B;--dark:#2B1B13;--cream:#FAF7F2;--panel:#F2E9E0;--muted:#7D7168;--rose:#D98A85;--green:#3E6B4A;--line:#E4DAD0;--white:#fff}
+:root{--bg:#0E0E10;--surf:#16161A;--surf2:#1C1C20;--line:#2A2A2F;--text:#F2EDE8;--muted:#A39A92;--red:#E5372E;--rose:#F0857C;--amber:#F5A524;--green:#4CBF7A}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--dark);line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-/* nav */
-nav{position:sticky;top:0;z-index:10;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{position:sticky;top:0;z-index:10;background:rgba(14,14,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-nav .brand{font-weight:800;letter-spacing:.02em;font-size:15px;text-decoration:none;white-space:nowrap}
-nav .brand b{color:var(--red)}
+.brand{font-weight:800;letter-spacing:.02em;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand b{color:var(--red)}
 nav ul{display:flex;gap:22px;list-style:none;font-size:14px;font-weight:600;color:var(--muted)}
-nav ul a{text-decoration:none} nav ul a:hover{color:var(--red)}
-@media(max-width:760px){nav ul{display:none}}
-/* hero */
-.hero{background:var(--red);color:#fff;padding:84px 0 96px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.06)}
-.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
-.kicker i{display:inline-block;width:40px;height:2px;background:currentColor;opacity:.6}
-.hero h1{font-size:clamp(40px,6.4vw,72px);line-height:1.03;font-weight:800;letter-spacing:-.03em;margin-top:26px;max-width:880px}
-.hero h1 em{font-style:normal;color:#F6C9C4}
-.hero p.lead{font-size:clamp(17px,2vw,21px);max-width:760px;margin-top:22px;color:rgba(255,255,255,.9)}
+nav ul a{text-decoration:none;transition:color .15s} nav ul a:hover{color:var(--text)}
+@media(max-width:820px){nav ul{display:none}}
+.hero{position:relative;overflow:hidden;padding:96px 0 120px;border-bottom:1px solid var(--line)}
+.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:780px;height:780px;background:radial-gradient(circle,rgba(229,55,46,.28),rgba(229,55,46,0) 62%);pointer-events:none}
+.hero:after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.35;mask-image:linear-gradient(to bottom,#000,transparent 85%);-webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surf);border-radius:30px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--muted)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.hero h1{font-size:clamp(40px,6.6vw,76px);line-height:1.02;font-weight:800;letter-spacing:-.035em;margin-top:26px;max-width:900px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--red),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,20px);max-width:740px;margin-top:22px;color:var(--muted)}
 .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
-.btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.18)}
-.btn.primary{background:#fff;color:var(--red)}
-.btn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--red);color:#fff;box-shadow:0 8px 24px rgba(229,55,46,.35)}
+.btn.ghost{background:var(--surf);color:var(--text);border:1px solid var(--line)} .btn.ghost:hover{background:var(--surf2)}
 .btn svg{width:18px;height:18px}
-.byline{margin-top:30px;font-size:14px;color:rgba(255,255,255,.8)}
-/* kpis */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-48px;position:relative;z-index:2}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;box-shadow:0 10px 30px rgba(43,27,19,.06)}
-.kpi b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em}
+.byline{margin-top:28px;font-size:14px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-56px;position:relative;z-index:2}
+.kpi{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:22px}
+.kpi b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .kpi span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px}
+.kpi.hl{border-color:rgba(229,55,46,.55);background:linear-gradient(180deg,rgba(229,55,46,.14),var(--surf))}
 @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
-/* sections */
-section{padding:84px 0 0}
-.sec-k{color:var(--muted)} .sec-k b{color:var(--red)}
-h2{font-size:clamp(30px,4vw,44px);line-height:1.1;font-weight:800;letter-spacing:-.025em;margin-top:14px}
+section{padding:96px 0 0}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
+.kicker b{color:var(--red)} .kicker i{display:inline-block;width:40px;height:2px;background:var(--line)}
+h2{font-size:clamp(30px,4vw,46px);line-height:1.08;font-weight:800;letter-spacing:-.03em;margin-top:14px;max-width:880px}
 h2 em{font-style:normal;color:var(--red)}
-.sub{color:var(--muted);font-size:18px;margin-top:10px;max-width:760px}
-/* findings */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
-@media(max-width:760px){.grid2{grid-template-columns:1fr}}
-.tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px}
-.tile .big{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1}
-.tile h3{font-size:18px;margin-top:12px}
+.sub{color:var(--muted);font-size:18px;margin-top:12px;max-width:760px}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:30px 30px 22px;margin-top:32px}
+.panel .ph{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.panel .ph b{font-size:17px} .panel .ph span{font-size:13.5px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:22px;font-size:14px;color:var(--muted);margin-bottom:6px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:8px;vertical-align:-2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.tile{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:26px 28px}
+.tile .big{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.tile h3{font-size:17px;margin-top:12px}
 .tile p{color:var(--muted);font-size:15.5px;margin-top:6px}
-.tile.red{background:var(--red);border-color:var(--red);color:#fff} .tile.red p{color:rgba(255,255,255,.85)}
-.tile.dark{background:var(--dark);border-color:var(--dark);color:#fff} .tile.dark p{color:rgba(255,255,255,.75)}
-.tile.red .big,.tile.dark .big{color:#fff}
-/* gallery */
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
-@media(max-width:760px){.gallery{grid-template-columns:1fr}}
-figure{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:zoom-in;transition:box-shadow .15s ease}
-figure:hover{box-shadow:0 10px 30px rgba(43,27,19,.1)}
-figure img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line)}
-figcaption{padding:16px 20px 18px;font-size:15px} figcaption b{display:block;font-size:16px}
-figcaption span{color:var(--muted)}
-/* lightbox */
-#lb{position:fixed;inset:0;background:rgba(20,12,8,.86);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
-#lb.on{display:flex} #lb img{max-height:94vh;max-width:94vw;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-/* method */
-.split{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start;margin-top:34px}
-@media(max-width:860px){.split{grid-template-columns:1fr}}
+.tile.accent{background:linear-gradient(160deg,rgba(229,55,46,.22),var(--surf) 70%);border-color:rgba(229,55,46,.5)}
+.red{color:var(--red)} .green{color:var(--green)} .amber{color:var(--amber)}
+.mini{background:var(--surf2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.mini span{display:block;font-size:13px;color:var(--muted)} .mini b{font-size:24px;font-weight:800} .mini small{font-size:14px;color:var(--muted);font-weight:600;margin-left:6px} .mini em{display:block;font-style:normal;font-weight:700;font-size:13.5px;margin-top:2px}
+.scards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+@media(max-width:820px){.scards{grid-template-columns:1fr}}
+.scard{background:var(--surf);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.scard h4{font-size:15px;letter-spacing:.14em;padding:14px 22px;border-bottom:1px solid var(--line);color:var(--c);display:flex;align-items:center;gap:10px}
+.scard h4:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.scard dl{padding:6px 22px 18px} .scard dt{font-size:13px;color:var(--muted);margin-top:12px} .scard dd{font-size:19px;font-weight:700}
+.fans{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:820px){.fans{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-top:32px}
+.stack{margin-top:32px}.stack .steps{display:grid;grid-template-columns:1fr 1fr;column-gap:32px}.stack .panel{margin-top:8px}
+@media(max-width:820px){.stack .steps{grid-template-columns:1fr}}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.split .panel{margin-top:0}
 .steps{list-style:none;counter-reset:s}
-.steps li{counter-increment:s;position:relative;padding:0 0 22px 56px}
-.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
-.steps h4{font-size:18px} .steps p{color:var(--muted);font-size:15.5px;margin-top:4px}
-/* table */
-.tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:15px}
-.tbl th{background:var(--red);color:#fff;text-align:left;padding:13px 16px;font-weight:700}
-.tbl td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
-.tbl td.v{font-weight:800;color:var(--red);white-space:nowrap}
-.tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:20px;white-space:nowrap}
-.tg{background:#E3EDE5;color:var(--green)} .ta{background:#F3E6D3;color:#8A6232}
-.tbl-wrap{overflow-x:auto}
-/* downloads */
-.dl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.steps li{counter-increment:s;position:relative;padding:0 0 24px 58px}
+.steps li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:12px;background:var(--surf2);border:1px solid var(--line);color:var(--red);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.steps h4{font-size:17px} .steps p{color:var(--muted);font-size:15.5px;margin-top:4px}
+.tbl-wrap{overflow-x:auto;margin-top:32px;border:1px solid var(--line);border-radius:18px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;background:var(--surf);min-width:640px}
+.tbl th{text-align:left;padding:14px 18px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surf2);border-bottom:1px solid var(--line)}
+.tbl td{padding:13px 18px;border-top:1px solid var(--line);vertical-align:top}
+.tbl tr:first-child td{border-top:0}
+.tbl td.v{font-weight:800;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.05em;padding:4px 10px;border-radius:20px;white-space:nowrap;text-transform:uppercase}
+.tg{background:rgba(76,191,122,.14);color:var(--green)} .ta{background:rgba(245,165,36,.14);color:var(--amber)}
+.note{color:var(--muted);font-size:15px;margin-top:16px}
+.dl{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
 @media(max-width:900px){.dl{grid-template-columns:repeat(2,1fr)}} @media(max-width:520px){.dl{grid-template-columns:1fr}}
-.dl a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:transform .15s ease,box-shadow .15s ease}
-.dl a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(43,27,19,.08)}
-.dl .ext{display:inline-block;align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.06em;padding:5px 10px;border-radius:8px;background:var(--panel);color:var(--red)}
-.dl b{font-size:17px} .dl span{color:var(--muted);font-size:14.5px} .dl em{font-style:normal;font-weight:700;color:var(--red);font-size:14px;margin-top:auto}
-/* skills + footer */
+.dlc{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:24px 22px;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:transform .15s,border-color .15s}
+.dlc:hover{transform:translateY(-2px);border-color:var(--red)}
+.ext{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.06em;padding:5px 10px;border-radius:8px;background:rgba(229,55,46,.14);color:var(--red)}
+.dlc b{font-size:17px} .dlc span:not(.ext){color:var(--muted);font-size:14.5px} .dlc em{font-style:normal;font-weight:700;color:var(--red);font-size:14px;margin-top:auto}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.chips span{background:var(--panel);border-radius:30px;padding:9px 18px;font-weight:600;font-size:15px}
-.about{background:var(--dark);color:#fff;border-radius:24px;padding:44px 40px;margin-top:84px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+.chips span{background:var(--surf);border:1px solid var(--line);border-radius:30px;padding:8px 16px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.about{background:linear-gradient(135deg,rgba(229,55,46,.2),var(--surf) 60%);border:1px solid var(--line);border-radius:24px;padding:44px 40px;margin-top:96px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
 @media(max-width:760px){.about{grid-template-columns:1fr;padding:32px 26px}}
-.about h3{font-size:30px;letter-spacing:-.02em} .about p{color:rgba(255,255,255,.78);margin-top:10px}
-.about .btn.primary{color:var(--dark)}
+.about h3{font-size:30px;letter-spacing:-.02em} .about p{color:var(--muted);margin-top:10px}
 footer{padding:44px 0 56px;color:var(--muted);font-size:13.5px}
-footer p+p{margin-top:8px}
+footer p+p{margin-top:8px} footer a{color:var(--text)}
+svg text{font-variant-numeric:tabular-nums}
+@media(max-width:700px){.panel{overflow-x:auto;padding:22px 18px 16px}.panel>svg{min-width:640px}.fans svg{min-width:400px}.panel .ph,.panel .legend,.panel .grid3,.panel .grid2{min-width:0}.panel:after{content:"Swipe to see the full chart →";display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-top:10px}}
 </style>
 </head>
 <body>
 <nav><div class="wrap"><a class="brand" href="#top"><b>CMG</b> · FP&amp;A Case Study</a>
-<ul><li><a href="#findings">Findings</a></li><li><a href="#visuals">Visuals</a></li><li><a href="#model">Model</a></li><li><a href="#assumptions">Assumptions</a></li><li><a href="#downloads">Downloads</a></li></ul></div></nav>
+<ul><li><a href="#findings">Findings</a></li><li><a href="#variance">Variance</a></li><li><a href="#forecast">Forecast</a></li><li><a href="#scenarios">Scenarios</a></li><li><a href="#model">Model</a></li><li><a href="#downloads">Downloads</a></li></ul></div></nav>
 
 <header class="hero" id="top"><div class="wrap">
-<div class="kicker">Chipotle Mexican Grill <i></i> NYSE: CMG</div>
+<span class="pill"><i></i>Chipotle Mexican Grill · NYSE: CMG · Built from the FY2025 Form 10-K</span>
 <h1>Driver-Based 3&#8209;Statement Model <em>&amp; FP&amp;A Case Study</em></h1>
-<p class="lead">A fully linked income statement, balance sheet and cash flow model built by hand from Chipotle's FY2025 Form 10-K, with a FY2025 budget-vs-actual variance bridge, a 2026–2027 forecast and a one-switch Base / Bull / Bear scenario engine.</p>
+<p class="lead">A fully linked income statement, balance sheet and cash flow model built by hand, with a FY2025 budget-vs-actual variance bridge, a 2026–2027 forecast and a one-switch Base / Bull / Bear scenario engine.</p>
 <div class="btns">
-<a class="btn primary" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download the Excel model</a>
-<a class="btn ghost" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Case_Study_Ajay_Patil.pdf">Case study (PDF)</a>
+<a class="btn primary" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download the Excel model</a>
+<a class="btn ghost" href="#downloads">All files</a>
 <a class="btn ghost" href="https://github.com/ajaaypatil0108/chipotle-fpa-model">View on GitHub</a>
 </div>
 <p class="byline">Ajay Patil · MS Finance, The University of Texas at Dallas</p>
@@ -129,42 +136,54 @@ footer p+p{margin-top:8px}
 
 <div class="wrap">
 <div class="kpis">
-<div class="kpi"><b>$11.93B</b><span>FY2025 revenue (+5.4%)</span></div>
-<div class="kpi"><b>$1.54B</b><span>FY2025 net income</span></div>
-<div class="kpi"><b>16.2%</b><span>FY2025 operating margin</span></div>
-<div class="kpi"><b>$14.38B</b><span>2027E revenue, Base case</span></div>
+<div class="kpi "><b>$11.93B</b><span>FY2025 revenue (+5.4%)</span></div><div class="kpi "><b>$1.54B</b><span>FY2025 net income</span></div><div class="kpi "><b>16.2%</b><span>FY2025 operating margin</span></div><div class="kpi hl"><b>$14.38B</b><span>2027E revenue, Base case</span></div>
 </div>
 
 <section id="findings">
-<div class="kicker sec-k"><b>01</b><i></i>Key findings</div>
-<h2>The growth engine held. <em>Sales per restaurant didn't.</em></h2>
-<p class="sub">Chipotle opened more restaurants than planned in 2025 but still missed a budget built from its February 2025 guidance.</p>
+<div class="kicker"><b>01</b><i></i>Key findings</div><h2>The growth engine held. <em>Sales per restaurant didn’t.</em></h2><p class="sub">Chipotle opened more restaurants than planned in 2025 but still missed a budget built from its February 2025 guidance.</p>
 <div class="grid2">
-<div class="tile red"><div class="big">−$828M</div><h3>FY2025 revenue below budget (−6.5%)</h3><p>Volume added $7M; comparable sales (−1.7% vs. +4.0% budgeted) cost $699M; other per-restaurant effects cost $135M.</p></div>
-<div class="tile"><div class="big" style="color:var(--green)">16.2%</div><h3>Operating margin held</h3><p>Only 27 bps below the 16.5% budget. Net income of $1.54B missed by $70M (−4.3%), helped by a 23.6% tax rate vs. 26% budgeted.</p></div>
-<div class="tile"><div class="big" style="color:var(--red)">$14.38B</div><h3>2027E revenue, Base case</h3><p>About 8% unit growth a year, flat comparable sales in 2026 and +3% in 2027. Net income reaches $1.75B.</p></div>
-<div class="tile dark"><div class="big">1.7×</div><h3>2025 buybacks vs. free cash flow</h3><p>$2.43B repurchased against $1.45B of free cash flow; cash plus investments fell from $2.29B to $1.25B.</p></div>
+<div class="tile accent"><div class="big red">−$828M</div><h3>FY2025 revenue below budget (−6.5%)</h3><p>Volume added $7M; comparable sales (−1.7% vs. +4.0% budgeted) cost $699M; other per-restaurant effects cost $135M.</p></div>
+<div class="tile"><div class="big green">16.2%</div><h3>Operating margin held</h3><p>Only 27 bps below the 16.5% budget. Net income of $1.54B missed by $70M (−4.3%), helped by a 23.6% tax rate vs. 26% budgeted.</p></div>
+<div class="tile"><div class="big">$14.38B</div><h3>2027E revenue, Base case</h3><p>About 8% unit growth a year, flat comparable sales in 2026 and +3% in 2027. Net income reaches $1.75B.</p></div>
+<div class="tile"><div class="big amber">1.7×</div><h3>2025 buybacks vs. free cash flow</h3><p>$2.43B repurchased against $1.45B of free cash flow; cash plus investments fell from $2.29B to $1.25B.</p></div>
 </div>
 </section>
 
-<section id="visuals">
-<div class="kicker sec-k"><b>02</b><i></i>Visual walkthrough</div>
-<h2>The analysis, slide by slide</h2>
-<p class="sub">Click any chart to enlarge it. All figures come from the Excel model.</p>
-<div class="gallery">
-<figure><img src="img/slide-05.png" alt="FY2025 revenue bridge from budget to actual" loading="lazy"><figcaption><b>FY2025 revenue bridge</b><span>Where the $828M miss came from: volume vs. comparable sales vs. other effects.</span></figcaption></figure>
-<figure><img src="img/slide-04.png" alt="Revenue, restaurant count and operating margin 2023 to 2027" loading="lazy"><figcaption><b>Revenue climbs to $14.4B by 2027</b><span>Revenue, restaurant count and operating margin, 2023A–2027E.</span></figcaption></figure>
-<figure><img src="img/slide-07.png" alt="Bear, Base and Bull scenario drivers and outcomes" loading="lazy"><figcaption><b>One switch, three outcomes</b><span>Scenario drivers and the resulting revenue and net income paths.</span></figcaption></figure>
-<figure><img src="img/slide-08.png" alt="Net income, free cash flow and buybacks" loading="lazy"><figcaption><b>Buybacks vs. free cash flow</b><span>2025 repurchases ran at 1.7× free cash flow.</span></figcaption></figure>
-<figure><img src="img/slide-09.png" alt="Sensitivity of 2027 net income" loading="lazy"><figcaption><b>Risks and sensitivities</b><span>Bear to Bull spans a $699M range in 2027 net income.</span></figcaption></figure>
-<figure><img src="img/slide-06.png" alt="FY2025 actual as a percent of budget" loading="lazy"><figcaption><b>Budget vs. actual</b><span>Revenue, operating income and net income as a % of budget.</span></figcaption></figure>
+<section id="variance">
+<div class="kicker"><b>02</b><i></i>Variance · FY2025</div><h2>The miss came from <em>sales per restaurant</em></h2><p class="sub">Revenue bridge from a budget built on February 2025 guidance to FY2025 actual.</p>
+<div class="panel"><div class="ph"><b>FY2025 revenue bridge</b><span>$ · axis starts at $11.0B</span></div><svg width="100%" viewBox="0 0 914 500" font-family="Inter, system-ui, sans-serif" role="img"><line x1="70" x2="914" y1="404.0" y2="404.0" stroke="#2A2A2F"/><text x="60.0" y="409.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$11.0B</text><line x1="70" x2="914" y1="314.0" y2="314.0" stroke="#2A2A2F"/><text x="60.0" y="319.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$11.5B</text><line x1="70" x2="914" y1="224.0" y2="224.0" stroke="#2A2A2F"/><text x="60.0" y="229.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$12.0B</text><line x1="70" x2="914" y1="134.0" y2="134.0" stroke="#2A2A2F"/><text x="60.0" y="139.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$12.5B</text><line x1="70" x2="914" y1="44.0" y2="44.0" stroke="#2A2A2F"/><text x="60.0" y="49.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$13.0B</text><rect x="88.4" y="88.35199999999998" width="132" height="315.648" fill="#F2EDE8" rx="3"/><text x="154.4" y="76.4" font-size="21" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$12.75B</text><text x="154.4" y="432.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >FY2025</text><text x="154.4" y="452.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >budget</text><rect x="257.20000000000005" y="87.16399999999987" width="132" height="3.0" fill="#4CBF7A" rx="3"/><text x="323.2" y="75.2" font-size="21" fill="#4CBF7A" text-anchor="middle" font-weight="700" >+$7M</text><line x1="220.4" x2="257.20000000000005" y1="88.35199999999998" y2="88.35199999999998" stroke="#A39A92" stroke-dasharray="4 4"/><text x="323.2" y="432.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Volume</text><text x="323.2" y="452.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >(units)</text><rect x="426.0" y="87.16399999999987" width="132" height="125.89199999999994" fill="#F0857C" rx="3"/><text x="492.0" y="75.2" font-size="21" fill="#E5372E" text-anchor="middle" font-weight="700" >−$699M</text><line x1="389.20000000000005" x2="426.0" y1="87.16399999999987" y2="87.16399999999987" stroke="#A39A92" stroke-dasharray="4 4"/><text x="492.0" y="432.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Comparable</text><text x="492.0" y="452.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >sales</text><rect x="594.8000000000001" y="213.0559999999998" width="132" height="24.35399999999987" fill="#F0857C" rx="3"/><text x="660.8" y="201.1" font-size="21" fill="#E5372E" text-anchor="middle" font-weight="700" >−$135M</text><line x1="558.0" x2="594.8000000000001" y1="213.0559999999998" y2="213.0559999999998" stroke="#A39A92" stroke-dasharray="4 4"/><text x="660.8" y="432.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Other</text><text x="660.8" y="452.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >per-restaurant</text><rect x="763.6" y="237.39199999999994" width="132" height="166.60800000000006" fill="#E5372E" rx="3"/><text x="829.6" y="225.4" font-size="21" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$11.93B</text><line x1="726.8000000000001" x2="763.6" y1="237.40999999999968" y2="237.40999999999968" stroke="#A39A92" stroke-dasharray="4 4"/><text x="829.6" y="432.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >FY2025</text><text x="829.6" y="452.0" font-size="16" fill="#F2EDE8" text-anchor="middle" font-weight="600" >actual</text><text x="70.0" y="494.0" font-size="14" fill="#A39A92" text-anchor="start" font-weight="400" >Axis starts at $11.0B so the changes are visible.</text></svg>
+<div class="grid3">
+<div class="mini"><span>New openings</span><b>334</b><small>vs 330</small><em class="green">+4 restaurants</em></div>
+<div class="mini"><span>Comparable sales</span><b>−1.7%</b><small>vs +4.0%</small><em class="red">−570 bps</em></div>
+<div class="mini"><span>Revenue per restaurant</span><b>$3.07M</b><small>vs $3.29M</small><em class="red">−6.5%</em></div>
+</div></div>
+<div class="panel"><div class="ph"><b>FY2025 actual as a % of budget</b><span>Margin held; net income missed least</span></div><svg width="100%" viewBox="0 0 914 330" font-family="Inter, system-ui, sans-serif" role="img"><line x1="230.0" x2="230.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="230.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >80%</text><line x1="350.0" x2="350.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="350.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >85%</text><line x1="470.0" x2="470.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="470.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >90%</text><line x1="590.0" x2="590.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="590.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >95%</text><line x1="710.0" x2="710.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="710.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >100%</text><line x1="830.0" x2="830.0" y1="10" y2="290" stroke="#2A2A2F"/><text x="830.0" y="316.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >105%</text><text x="0.0" y="54.0" font-size="19" fill="#F2EDE8" text-anchor="start" font-weight="700" >Revenue</text><text x="0.0" y="78.0" font-size="14" fill="#A39A92" text-anchor="start" font-weight="400" >$11.93B vs $12.75B</text><rect x="230.0" y="36" width="324.1851712457658" height="40" rx="4" fill="#E5372E"/><text x="564.2" y="63.0" font-size="19" fill="#E5372E" text-anchor="start" font-weight="800" >93.5%</text><text x="634.2" y="63.0" font-size="16" fill="#A39A92" text-anchor="start" font-weight="400" >(−6.5%)</text><text x="0.0" y="144.0" font-size="19" fill="#F2EDE8" text-anchor="start" font-weight="700" >Operating income</text><text x="0.0" y="168.0" font-size="14" fill="#A39A92" text-anchor="start" font-weight="400" >$1.94B vs $2.10B</text><rect x="230.0" y="126" width="287.7171640372553" height="40" rx="4" fill="#E5372E"/><text x="527.7" y="153.0" font-size="19" fill="#E5372E" text-anchor="start" font-weight="800" >92.0%</text><text x="597.7" y="153.0" font-size="16" fill="#A39A92" text-anchor="start" font-weight="400" >(−8.0%)</text><text x="0.0" y="234.0" font-size="19" fill="#F2EDE8" text-anchor="start" font-weight="700" >Net income</text><text x="0.0" y="258.0" font-size="14" fill="#A39A92" text-anchor="start" font-weight="400" >$1.54B vs $1.61B</text><rect x="230.0" y="216" width="376.0941880022425" height="40" rx="4" fill="#E5372E"/><text x="616.1" y="243.0" font-size="19" fill="#E5372E" text-anchor="start" font-weight="800" >95.7%</text><text x="686.1" y="243.0" font-size="16" fill="#A39A92" text-anchor="start" font-weight="400" >(−4.3%)</text><line x1="710.0" x2="710.0" y1="10" y2="290" stroke="#F2EDE8" stroke-width="3"/><text x="716.0" y="22.0" font-size="14" fill="#F2EDE8" text-anchor="start" font-weight="700" >Budget = 100%</text></svg></div>
+</section>
+
+<section id="forecast">
+<div class="kicker"><b>03</b><i></i>Top line</div><h2>Revenue climbs to <em>$14.4B</em> by 2027</h2><p class="sub">Growth comes from new restaurants first and comparable sales second.</p>
+<div class="panel"><div class="legend"><span><i style="background:#E5372E"></i>Actual</span><span><i style="background:#F0857C"></i>Base case forecast</span></div><svg width="100%" viewBox="0 0 914 700" font-family="Inter, system-ui, sans-serif" role="img"><line x1="64" x2="914" y1="420.0" y2="420.0" stroke="#2A2A2F"/><text x="54.0" y="425.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$0B</text><line x1="64" x2="914" y1="301.25" y2="301.25" stroke="#2A2A2F"/><text x="54.0" y="306.2" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$5B</text><line x1="64" x2="914" y1="182.5" y2="182.5" stroke="#2A2A2F"/><text x="54.0" y="187.5" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$10B</text><line x1="64" x2="914" y1="63.75" y2="63.75" stroke="#2A2A2F"/><text x="54.0" y="68.8" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$15B</text><rect x="93.0" y="185.54949999999997" width="112" height="234.45050000000003" fill="#E5372E" rx="4"/><text x="149.0" y="173.5" font-size="22" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$9.87B</text><text x="149.0" y="448.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2023A</text><rect x="263.0" y="151.294875" width="112" height="268.705125" fill="#E5372E" rx="4"/><text x="319.0" y="139.3" font-size="22" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$11.31B</text><text x="319.0" y="181.3" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="600" >+14.6%</text><text x="319.0" y="448.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2024A</text><rect x="433.0" y="136.767" width="112" height="283.233" fill="#E5372E" rx="4"/><text x="489.0" y="124.8" font-size="22" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$11.93B</text><text x="489.0" y="166.8" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="600" >+5.4%</text><text x="489.0" y="448.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2025A</text><rect x="603.0" y="113.14050000000003" width="112" height="306.85949999999997" fill="#F0857C" rx="4"/><text x="659.0" y="101.1" font-size="22" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$12.92B</text><text x="659.0" y="143.1" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="600" >+8.3%</text><text x="659.0" y="448.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2026E</text><rect x="773.0" y="78.43462499999998" width="112" height="341.565375" fill="#F0857C" rx="4"/><text x="829.0" y="66.4" font-size="22" fill="#F2EDE8" text-anchor="middle" font-weight="700" >$14.38B</text><text x="829.0" y="108.4" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="600" >+11.3%</text><text x="829.0" y="448.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2027E</text><text x="64.0" y="490.0" font-size="16" fill="#F2EDE8" text-anchor="start" font-weight="700" >Ending restaurants</text><rect x="93.0" y="504" width="112" height="44" rx="22" fill="#1C1C20"/><text x="149.0" y="533.0" font-size="19" fill="#F2EDE8" text-anchor="middle" font-weight="700" >3,437</text><rect x="263.0" y="504" width="112" height="44" rx="22" fill="#1C1C20"/><text x="319.0" y="533.0" font-size="19" fill="#F2EDE8" text-anchor="middle" font-weight="700" >3,726</text><rect x="433.0" y="504" width="112" height="44" rx="22" fill="#1C1C20"/><text x="489.0" y="533.0" font-size="19" fill="#F2EDE8" text-anchor="middle" font-weight="700" >4,042</text><rect x="603.0" y="504" width="112" height="44" rx="22" fill="#1C1C20"/><text x="659.0" y="533.0" font-size="19" fill="#F2EDE8" text-anchor="middle" font-weight="700" >4,374</text><rect x="773.0" y="504" width="112" height="44" rx="22" fill="#1C1C20"/><text x="829.0" y="533.0" font-size="19" fill="#F2EDE8" text-anchor="middle" font-weight="700" >4,721</text><text x="64.0" y="600.0" font-size="16" fill="#F2EDE8" text-anchor="start" font-weight="700" >Operating margin</text><line x1="64" x2="914" y1="690" y2="690" stroke="#2A2A2F"/><path d="M149.0,665.0 L319.0,627.9 L489.0,650.6 L659.0,661.2 L829.0,659.9" fill="none" stroke="#F2EDE8" stroke-width="3"/><circle cx="149.0" cy="665.04" r="6" fill="#0E0E10" stroke="#F2EDE8" stroke-width="3"/><text x="161.0" y="655.0" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="400" >15.8%</text><circle cx="319.0" cy="627.92" r="6" fill="#0E0E10" stroke="#F2EDE8" stroke-width="3"/><text x="331.0" y="617.9" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="400" >16.9%</text><circle cx="489.0" cy="650.64" r="6" fill="#0E0E10" stroke="#F2EDE8" stroke-width="3"/><text x="501.0" y="640.6" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="400" >16.2%</text><circle cx="659.0" cy="661.2" r="6" fill="#0E0E10" stroke="#F2EDE8" stroke-width="3"/><text x="671.0" y="651.2" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="400" >15.9%</text><circle cx="829.0" cy="659.9200000000001" r="6" fill="#0E0E10" stroke="#F2EDE8" stroke-width="3"/><text x="841.0" y="649.9" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="400" >15.9%</text></svg></div>
+<div class="panel"><div class="ph"><b>Net income, free cash flow and buybacks ($B)</b><span>2025 buybacks were 1.7× free cash flow</span></div><div class="legend"><span><i style="background:#E5372E"></i>Net income</span><span><i style="background:#D9A866"></i>Free cash flow</span><span><i style="background:#F2EDE8"></i>Buybacks</span></div><svg width="100%" viewBox="0 0 914 520" font-family="Inter, system-ui, sans-serif" role="img"><rect x="572.4000000000001" y="22" width="341.5999999999999" height="422" fill="#1C1C20" rx="6"/><text x="584.4" y="44.0" font-size="15" fill="#A39A92" text-anchor="start" font-weight="600" >Base case forecast</text><line x1="60" x2="914" y1="444.0" y2="444.0" stroke="#2A2A2F"/><text x="50.0" y="449.0" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$0.0B</text><line x1="60" x2="914" y1="365.15384615384613" y2="365.15384615384613" stroke="#2A2A2F"/><text x="50.0" y="370.2" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$0.5B</text><line x1="60" x2="914" y1="286.30769230769226" y2="286.30769230769226" stroke="#2A2A2F"/><text x="50.0" y="291.3" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$1.0B</text><line x1="60" x2="914" y1="207.46153846153848" y2="207.46153846153848" stroke="#2A2A2F"/><text x="50.0" y="212.5" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$1.5B</text><line x1="60" x2="914" y1="128.61538461538458" y2="128.61538461538458" stroke="#2A2A2F"/><text x="50.0" y="133.6" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$2.0B</text><line x1="60" x2="914" y1="49.769230769230774" y2="49.769230769230774" stroke="#2A2A2F"/><text x="50.0" y="54.8" font-size="15" fill="#A39A92" text-anchor="end" font-weight="400" >$2.5B</text><rect x="72.4" y="250.24346153846153" width="46" height="193.75653846153847" fill="#E5372E" rx="3"/><text x="95.4" y="242.2" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.23</text><rect x="122.4" y="251.1896153846154" width="46" height="192.8103846153846" fill="#D9A866" rx="3"/><text x="145.4" y="243.2" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.22</text><rect x="172.4" y="350.5988461538461" width="46" height="93.40115384615385" fill="#F2EDE8" rx="3"/><text x="195.4" y="342.6" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >0.59</text><text x="145.4" y="474.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2023A</text><rect x="243.20000000000002" y="202.08423076923077" width="46" height="241.91576923076923" fill="#E5372E" rx="3"/><text x="266.2" y="194.1" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.53</text><rect x="293.20000000000005" y="205.64807692307693" width="46" height="238.35192307692307" fill="#D9A866" rx="3"/><text x="316.2" y="197.6" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.51</text><rect x="343.20000000000005" y="286.0553846153846" width="46" height="157.9446153846154" fill="#F2EDE8" rx="3"/><text x="366.2" y="278.1" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.00</text><text x="316.2" y="474.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2024A</text><rect x="414.0" y="201.81615384615387" width="46" height="242.18384615384613" fill="#E5372E" rx="3"/><text x="437.0" y="193.8" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.54</text><rect x="464.0" y="215.72461538461542" width="46" height="228.27538461538458" fill="#D9A866" rx="3"/><text x="487.0" y="207.7" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.45</text><rect x="514.0" y="61.51730769230767" width="46" height="382.48269230769233" fill="#F2EDE8" rx="3"/><text x="537.0" y="53.5" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >2.43</text><text x="487.0" y="474.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2025A</text><rect x="584.8000000000001" y="195.93423076923077" width="46" height="248.06576923076923" fill="#E5372E" rx="3"/><text x="607.8" y="187.9" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.57</text><rect x="634.8000000000001" y="235.9407692307692" width="46" height="208.0592307692308" fill="#D9A866" rx="3"/><text x="657.8" y="227.9" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.32</text><rect x="684.8000000000001" y="239.0" width="46" height="205.0" fill="#F2EDE8" rx="3"/><text x="707.8" y="231.0" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.30</text><text x="657.8" y="474.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2026E</text><rect x="755.6" y="167.59692307692308" width="46" height="276.4030769230769" fill="#E5372E" rx="3"/><text x="778.6" y="159.6" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.75</text><rect x="805.6" y="200.79115384615386" width="46" height="243.20884615384614" fill="#D9A866" rx="3"/><text x="828.6" y="192.8" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.54</text><rect x="855.6" y="239.0" width="46" height="205.0" fill="#F2EDE8" rx="3"/><text x="878.6" y="231.0" font-size="15" fill="#F2EDE8" text-anchor="middle" font-weight="600" >1.30</text><text x="828.6" y="474.0" font-size="18" fill="#A39A92" text-anchor="middle" font-weight="400" >2027E</text></svg>
+<div class="grid2" style="margin-top:16px">
+<div class="mini"><span>Cash + investments, end 2024 → end 2025</span><b>$2.29B → <b class="red">$1.25B</b></b></div>
+<div class="mini"><span>2026E free cash flow returned at $1.3B of buybacks</span><b class="amber">~99%</b><small>cash ends 2026 near $370M</small></div>
+</div></div>
+</section>
+
+<section id="scenarios">
+<div class="kicker"><b>04</b><i></i>Scenario engine</div><h2>One switch, <em>three outcomes</em></h2><p class="sub">Flip one cell and every driver re-computes across both forecast years.</p>
+<div class="scards">
+<div class="scard"><h4 style="--c:#8E9AAF">BEAR</h4><dl><dt>Openings 2026 / 2027</dt><dd>300 / 310</dd><dt>Comparable sales</dt><dd>−3% / 0%</dd><dt>Cost ratios vs. 2025</dt><dd>Higher</dd><dt>Buybacks per year</dt><dd>$1.0B</dd></dl></div>
+<div class="scard"><h4 style="--c:#E5372E">BASE</h4><dl><dt>Openings 2026 / 2027</dt><dd>345 / 360</dd><dt>Comparable sales</dt><dd>0% / +3%</dd><dt>Cost ratios vs. 2025</dt><dd>At or slightly above</dd><dt>Buybacks per year</dt><dd>$1.3B</dd></dl></div>
+<div class="scard"><h4 style="--c:#4CBF7A">BULL</h4><dl><dt>Openings 2026 / 2027</dt><dd>380 / 400</dd><dt>Comparable sales</dt><dd>+3% / +5%</dd><dt>Cost ratios vs. 2025</dt><dd>Lower</dd><dt>Buybacks per year</dt><dd>$1.5B</dd></dl></div>
 </div>
+<div class="panel"><div class="fans"><svg width="100%" viewBox="0 0 440 470" font-family="Inter, system-ui, sans-serif" role="img"><text x="0.0" y="24.0" font-size="21" fill="#F2EDE8" text-anchor="start" font-weight="800" >Revenue</text><line x1="80" x2="344" y1="366.25" y2="366.25" stroke="#2A2A2F"/><text x="72.0" y="371.2" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$12.00B</text><line x1="80" x2="344" y1="278.75" y2="278.75" stroke="#2A2A2F"/><text x="72.0" y="283.8" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$13.00B</text><line x1="80" x2="344" y1="191.25" y2="191.25" stroke="#2A2A2F"/><text x="72.0" y="196.2" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$14.00B</text><line x1="80" x2="344" y1="103.75" y2="103.75" stroke="#2A2A2F"/><text x="72.0" y="108.8" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$15.00B</text><path d="M80.0,372.375 L212.0,246.37500000000006 L344.0,77.49999999999994 L344.0,252.49999999999994 L212.0,325.99999999999994 Z" fill="#F0857C" opacity=".18"/><path d="M80.0,372.375 L212.0,325.99999999999994 L344.0,252.49999999999994" fill="none" stroke="#8E9AAF" stroke-width="3"/><circle cx="212.0" cy="325.99999999999994" r="5" fill="#8E9AAF"/><circle cx="344.0" cy="252.49999999999994" r="5" fill="#8E9AAF"/><text x="356.0" y="258.5" font-size="16" fill="#8E9AAF" text-anchor="start" font-weight="700" >$13.30B</text><path d="M80.0,372.375 L212.0,285.75 L344.0,157.99999999999994" fill="none" stroke="#E5372E" stroke-width="4"/><circle cx="212.0" cy="285.75" r="5" fill="#E5372E"/><circle cx="344.0" cy="157.99999999999994" r="5" fill="#E5372E"/><text x="356.0" y="164.0" font-size="16" fill="#E5372E" text-anchor="start" font-weight="700" >$14.38B</text><path d="M80.0,372.375 L212.0,246.37500000000006 L344.0,77.49999999999994" fill="none" stroke="#4CBF7A" stroke-width="3"/><circle cx="212.0" cy="246.37500000000006" r="5" fill="#4CBF7A"/><circle cx="344.0" cy="77.49999999999994" r="5" fill="#4CBF7A"/><text x="356.0" y="83.5" font-size="16" fill="#4CBF7A" text-anchor="start" font-weight="700" >$15.30B</text><circle cx="80.0" cy="372.375" r="6" fill="#F2EDE8"/><text x="76.0" y="400.4" font-size="16" fill="#F2EDE8" text-anchor="start" font-weight="700" >$11.93B</text><text x="80.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2025A</text><text x="212.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2026E</text><text x="344.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2027E</text></svg><svg width="100%" viewBox="0 0 440 470" font-family="Inter, system-ui, sans-serif" role="img"><text x="0.0" y="24.0" font-size="21" fill="#F2EDE8" text-anchor="start" font-weight="800" >Net income</text><line x1="80" x2="344" y1="410.0" y2="410.0" stroke="#2A2A2F"/><text x="72.0" y="415.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$1.20B</text><line x1="80" x2="344" y1="340.0" y2="340.0" stroke="#2A2A2F"/><text x="72.0" y="345.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$1.40B</text><line x1="80" x2="344" y1="270.0" y2="270.0" stroke="#2A2A2F"/><text x="72.0" y="275.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$1.60B</text><line x1="80" x2="344" y1="200.0" y2="200.0" stroke="#2A2A2F"/><text x="72.0" y="205.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$1.80B</text><line x1="80" x2="344" y1="130.00000000000006" y2="130.00000000000006" stroke="#2A2A2F"/><text x="72.0" y="135.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$2.00B</text><line x1="80" x2="344" y1="60.0" y2="60.0" stroke="#2A2A2F"/><text x="72.0" y="65.0" font-size="14" fill="#A39A92" text-anchor="end" font-weight="400" >$2.20B</text><path d="M80.0,291.0 L212.0,196.5 L344.0,105.50000000000011 L344.0,350.49999999999994 L212.0,382.0 Z" fill="#F0857C" opacity=".18"/><path d="M80.0,291.0 L212.0,382.0 L344.0,350.49999999999994" fill="none" stroke="#8E9AAF" stroke-width="3"/><circle cx="212.0" cy="382.0" r="5" fill="#8E9AAF"/><circle cx="344.0" cy="350.49999999999994" r="5" fill="#8E9AAF"/><text x="356.0" y="356.5" font-size="16" fill="#8E9AAF" text-anchor="start" font-weight="700" >$1.37B</text><path d="M80.0,291.0 L212.0,280.5 L344.0,217.50000000000003" fill="none" stroke="#E5372E" stroke-width="4"/><circle cx="212.0" cy="280.5" r="5" fill="#E5372E"/><circle cx="344.0" cy="217.50000000000003" r="5" fill="#E5372E"/><text x="356.0" y="223.5" font-size="16" fill="#E5372E" text-anchor="start" font-weight="700" >$1.75B</text><path d="M80.0,291.0 L212.0,196.5 L344.0,105.50000000000011" fill="none" stroke="#4CBF7A" stroke-width="3"/><circle cx="212.0" cy="196.5" r="5" fill="#4CBF7A"/><circle cx="344.0" cy="105.50000000000011" r="5" fill="#4CBF7A"/><text x="356.0" y="111.5" font-size="16" fill="#4CBF7A" text-anchor="start" font-weight="700" >$2.07B</text><circle cx="80.0" cy="291.0" r="6" fill="#F2EDE8"/><text x="76.0" y="319.0" font-size="16" fill="#F2EDE8" text-anchor="start" font-weight="700" >$1.54B</text><text x="80.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2025A</text><text x="212.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2026E</text><text x="344.0" y="436.0" font-size="16" fill="#A39A92" text-anchor="middle" font-weight="400" >2027E</text></svg></div></div>
+<div class="panel"><div class="ph"><b>Sensitivity of 2027E net income</b><span>Bear to Bull spans a $699M range</span></div><svg width="100%" viewBox="0 0 914 430" font-family="Inter, system-ui, sans-serif" role="img"><line x1="470" x2="470" y1="20" y2="390" stroke="#F2EDE8" stroke-width="2"/><text x="470.0" y="14.0" font-size="15" fill="#A39A92" text-anchor="middle" font-weight="600" >Base 2027E net income: $1.75B</text><rect x="470" y="50" width="261.69" height="52" rx="4" fill="#4CBF7A"/><text x="743.7" y="84.0" font-size="21" fill="#4CBF7A" text-anchor="start" font-weight="800" >+$317M</text><text x="454.0" y="83.0" font-size="17" fill="#F2EDE8" text-anchor="end" font-weight="600" >Bull scenario (all drivers)</text><rect x="154.60250000000002" y="138" width="315.3975" height="52" rx="4" fill="#8E9AAF"/><text x="142.6" y="172.0" font-size="21" fill="#8E9AAF" text-anchor="end" font-weight="800" >−$382M</text><text x="486.0" y="171.0" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="600" >Bear scenario (all drivers)</text><rect x="427.265" y="250" width="42.73499999999999" height="52" rx="4" fill="#F0857C"/><text x="415.3" y="284.0" font-size="21" fill="#F0857C" text-anchor="end" font-weight="800" >−$52M</text><text x="486.0" y="283.0" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="600" >2027 comps 0% instead of +3%</text><rect x="425.5325" y="338" width="44.467499999999994" height="52" rx="4" fill="#F0857C"/><text x="413.5" y="372.0" font-size="21" fill="#F0857C" text-anchor="end" font-weight="800" >−$54M</text><text x="486.0" y="371.0" font-size="17" fill="#F2EDE8" text-anchor="start" font-weight="600" >Food or labor cost +50 bps</text><line x1="40" x2="874" y1="232" y2="232" stroke="#2A2A2F" stroke-dasharray="5 5"/><text x="40.0" y="422.0" font-size="15" fill="#A39A92" text-anchor="start" font-weight="400" >Change in 2027E net income vs. Base; single-driver shocks hold everything else constant.</text></svg></div>
 </section>
 
 <section id="model">
-<div class="kicker sec-k"><b>03</b><i></i>How the model works</div>
-<h2>One driver tree, three linked statements</h2>
-<div class="split">
+<div class="kicker"><b>05</b><i></i>How the model works</div><h2>One driver tree, <em>three linked statements</em></h2>
+<div class="stack">
 <ol class="steps">
 <li><h4>Actuals from the 10-K</h4><p>FY2023–FY2025 income statement, balance sheet, cash flow and restaurant counts, transcribed from Chipotle's FY2025 Form 10-K.</p></li>
 <li><h4>Driver-based revenue</h4><p>Revenue = average restaurants × revenue per restaurant, which grows at the comparable-sales rate. Costs are modeled as a % of revenue.</p></li>
@@ -172,36 +191,33 @@ footer p+p{margin-top:8px}
 <li><h4>Scenario switch</h4><p>One cell flips Base / Bull / Bear and re-runs openings, comparable sales, cost ratios, tax rate and buybacks across 2026–2027.</p></li>
 <li><h4>Variance and reporting</h4><p>A budget-vs-actual bridge for FY2025, a Power BI dashboard (8 DAX measures) and a written FP&amp;A memo.</p></li>
 </ol>
-<figure><img src="img/slide-03.png" alt="Driver tree of the model" loading="lazy"><figcaption><b>Driver tree</b><span>FY2025 actuals shown.</span></figcaption></figure>
+<div class="panel"><div class="ph"><b>Driver tree</b><span>FY2025 actuals shown</span></div><svg width="100%" viewBox="0 0 914 860" font-family="Inter, system-ui, sans-serif" role="img"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#A39A92"/></marker></defs><rect x="0" y="0" width="914" height="76" rx="14" fill="#24242A" stroke="#2A2A2F"/><text x="28.0" y="32.0" font-size="15" fill="#F0857C" text-anchor="start" font-weight="800" >SCENARIO SWITCH</text><text x="28.0" y="58.0" font-size="18" fill="#FFFFFF" text-anchor="start" font-weight="500" >Base / Bull / Bear  →  openings · comparable sales · cost ratios · tax rate · buybacks</text><rect x="40" y="130" width="380" height="110" rx="14" fill="#16161A" stroke="#2A2A2F" stroke-width="2"/><text x="230.0" y="162.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Average restaurants</text><text x="230.0" y="198.0" font-size="27" fill="#E5372E" text-anchor="middle" font-weight="800" >3,884</text><text x="230.0" y="224.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >3,726 start + 334 openings − 18 closures</text><rect x="494" y="130" width="380" height="110" rx="14" fill="#16161A" stroke="#2A2A2F" stroke-width="2"/><text x="684.0" y="162.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Revenue per restaurant</text><text x="684.0" y="198.0" font-size="27" fill="#E5372E" text-anchor="middle" font-weight="800" >$3.07M</text><text x="684.0" y="224.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >grows at the comparable-sales rate</text><line x1="230" y1="76" x2="230" y2="126" stroke="#F0857C" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)"/><line x1="684" y1="76" x2="684" y2="126" stroke="#F0857C" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)"/><text x="457.0" y="195.0" font-size="44" fill="#E5372E" text-anchor="middle" font-weight="800" >×</text><rect x="267" y="300" width="380" height="110" rx="14" fill="#E5372E" stroke="#E5372E" stroke-width="2"/><text x="457.0" y="332.0" font-size="17" fill="#FFFFFF" text-anchor="middle" font-weight="600" >Revenue</text><text x="457.0" y="368.0" font-size="27" fill="#FFFFFF" text-anchor="middle" font-weight="800" >$11.93B</text><text x="457.0" y="394.0" font-size="14" fill="rgba(255,255,255,.85)" text-anchor="middle" font-weight="400" >2025 actual</text><line x1="230" y1="240" x2="330" y2="296" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><line x1="684" y1="240" x2="584" y2="296" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><rect x="40" y="470" width="380" height="110" rx="14" fill="#16161A" stroke="#2A2A2F" stroke-width="2"/><text x="230.0" y="502.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Operating costs, % of revenue</text><text x="230.0" y="538.0" font-size="27" fill="#F2EDE8" text-anchor="middle" font-weight="800" >83.8%</text><text x="230.0" y="564.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >food 29.6 · labor 25.1 · other ops 14.7 · all else 14.4</text><rect x="494" y="470" width="380" height="110" rx="14" fill="#16161A" stroke="#2A2A2F" stroke-width="2"/><text x="684.0" y="502.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Operating income</text><text x="684.0" y="538.0" font-size="27" fill="#E5372E" text-anchor="middle" font-weight="800" >$1.94B</text><text x="684.0" y="564.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >16.2% margin</text><line x1="457" y1="410" x2="300" y2="466" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><line x1="457" y1="410" x2="614" y2="466" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><line x1="420" y1="525" x2="490" y2="525" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><rect x="267" y="630" width="380" height="100" rx="14" fill="#16161A" stroke="#2A2A2F" stroke-width="2"/><text x="457.0" y="662.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="600" >Net income</text><text x="457.0" y="698.0" font-size="27" fill="#E5372E" text-anchor="middle" font-weight="800" >$1.54B</text><line x1="684" y1="580" x2="560" y2="626" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><rect x="40" y="772" width="380" height="80" rx="14" fill="#1C1C20"/><text x="230.0" y="804.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="700" >Cash flow (indirect method)</text><text x="230.0" y="832.0" font-size="14" fill="#A39A92" text-anchor="middle" font-weight="400" >capex · buybacks · working capital</text><rect x="494" y="772" width="380" height="80" rx="14" fill="#1C1C20"/><text x="684.0" y="804.0" font-size="17" fill="#F2EDE8" text-anchor="middle" font-weight="700" >Balance sheet</text><text x="684.0" y="832.0" font-size="14" fill="#4CBF7A" text-anchor="middle" font-weight="700" >balance check = 0 in every year</text><line x1="400" y1="730" x2="300" y2="768" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><line x1="514" y1="730" x2="614" y2="768" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/><line x1="420" y1="812" x2="490" y2="812" stroke="#A39A92" stroke-width="2.5"  marker-end="url(#ah)"/></svg></div>
 </div>
 </section>
 
 <section id="assumptions">
-<div class="kicker sec-k"><b>04</b><i></i>Assumptions</div>
-<h2>Every input has a source</h2>
-<p class="sub">Base case. Guidance = tied to Chipotle's published outlook; my assumption = my own estimate.</p>
+<div class="kicker"><b>06</b><i></i>Assumptions</div><h2>Every input has <em>a source</em></h2><p class="sub">Base case. Guidance = tied to Chipotle’s published outlook; my assumption = my own estimate.</p>
 <div class="tbl-wrap"><table class="tbl">
 <tr><th>Input</th><th>Base</th><th>Basis</th><th>Type</th></tr>
-<tr><td>2026 new openings</td><td class="v">345</td><td>Feb 2026 guidance: 350–370 incl. 10–15 international partner-operated</td><td><span class="tag tg">GUIDANCE</span></td></tr>
-<tr><td>2026 comparable sales</td><td class="v">0%</td><td>Feb 2026 guidance: "about flat"</td><td><span class="tag tg">GUIDANCE</span></td></tr>
-<tr><td>Tax rate</td><td class="v">25%</td><td>Midpoint of 24–26% guidance before discrete items</td><td><span class="tag tg">GUIDANCE</span></td></tr>
-<tr><td>2027 openings / comparable sales</td><td class="v">360 / +3%</td><td>Continued ~8% unit growth; recovery after a flat 2026</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
-<tr><td>Cost ratios</td><td class="v">83.5%</td><td>Food, labor, occupancy, other, G&amp;A and D&amp;A as % of revenue, at or slightly above 2025</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
-<tr><td>Capex</td><td class="v">$1.5M</td><td>Per new restaurant, plus $290M a year for existing restaurants and corporate</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
-<tr><td>Buybacks</td><td class="v">$1.3B / yr</td><td>Policy input; cash is the balancing item</td><td><span class="tag ta">MY ASSUMPTION</span></td></tr>
-<tr><td>FY2025 budget</td><td class="v">330 · +4.0%</td><td>Openings and comparable sales from Feb 2025 guidance; 26% tax (guidance midpoint); 16.5% margin is my assumption</td><td><span class="tag tg">GUIDANCE</span> <span class="tag ta">+ MINE</span></td></tr>
+<tr><td>2026 new openings</td><td class="v">345</td><td>Feb 2026 guidance: 350–370 incl. 10–15 international partner-operated</td><td><span class="tag tg">Guidance</span></td></tr>
+<tr><td>2026 comparable sales</td><td class="v">0%</td><td>Feb 2026 guidance: "about flat"</td><td><span class="tag tg">Guidance</span></td></tr>
+<tr><td>Tax rate</td><td class="v">25%</td><td>Midpoint of 24–26% guidance before discrete items</td><td><span class="tag tg">Guidance</span></td></tr>
+<tr><td>2027 openings / comparable sales</td><td class="v">360 / +3%</td><td>Continued ~8% unit growth; recovery after a flat 2026</td><td><span class="tag ta">My assumption</span></td></tr>
+<tr><td>Cost ratios</td><td class="v">83.5%</td><td>Food, labor, occupancy, other, G&amp;A and D&amp;A as % of revenue, at or slightly above 2025</td><td><span class="tag ta">My assumption</span></td></tr>
+<tr><td>Capex</td><td class="v">$1.5M</td><td>Per new restaurant, plus $290M a year for existing restaurants and corporate</td><td><span class="tag ta">My assumption</span></td></tr>
+<tr><td>Buybacks</td><td class="v">$1.3B / yr</td><td>Policy input; cash is the balancing item</td><td><span class="tag ta">My assumption</span></td></tr>
+<tr><td>FY2025 budget</td><td class="v">330 · +4.0%</td><td>Openings and comparable sales from Feb 2025 guidance; 26% tax (guidance midpoint); 16.5% margin is my assumption</td><td><span class="tag tg">Guidance</span> <span class="tag ta">+ mine</span></td></tr>
 </table></div>
-<p class="sub" style="font-size:15px">Simplifications: operating leases, investments and other long-term items held at 2025 levels; stock-based compensation flat; share count and EPS not modeled.</p>
+<p class="note">Simplifications: operating leases, investments and other long-term items held at 2025 levels; stock-based compensation flat; share count and EPS not modeled.</p>
 </section>
 
 <section id="downloads">
-<div class="kicker sec-k"><b>05</b><i></i>Downloads</div>
-<h2>Everything in one place</h2>
+<div class="kicker"><b>07</b><i></i>Downloads</div><h2>Everything <em>in one place</em></h2>
 <div class="dl">
-<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><span class="ext">XLSX</span><b>Excel model</b><span>Historicals, assumptions, linked model, variance and Power BI data tabs.</span><em>Download →</em></a>
-<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/powerbi/Chipotle_FPA_Dashboard.pbix"><span class="ext">PBIX</span><b>Power BI dashboard</b><span>KPI cards and trend charts with 8 DAX measures. Opens in Power BI Desktop.</span><em>Download →</em></a>
-<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Case_Study_Ajay_Patil.pdf"><span class="ext">PDF</span><b>Case study deck</b><span>11-page visual walkthrough of findings, forecast and risks.</span><em>Download →</em></a>
-<a href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Memo.pdf"><span class="ext">PDF</span><b>FP&amp;A memo</b><span>Written variance review, forecast, assumptions and sensitivities.</span><em>Download →</em></a>
+<a class="dlc" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/model/Chipotle_3_Statement_Model.xlsx"><span class="ext">XLSX</span><b>Excel model</b><span>Historicals, assumptions, linked model, variance and Power BI data tabs.</span><em>Download →</em></a>
+<a class="dlc" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/powerbi/Chipotle_FPA_Dashboard.pbix"><span class="ext">PBIX</span><b>Power BI dashboard</b><span>KPI cards and trend charts with 8 DAX measures. Opens in Power BI Desktop.</span><em>Download →</em></a>
+<a class="dlc" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Case_Study_Ajay_Patil.pdf"><span class="ext">PDF</span><b>Case study deck</b><span>11-page visual walkthrough of findings, forecast and risks.</span><em>Download →</em></a>
+<a class="dlc" href="https://github.com/ajaaypatil0108/chipotle-fpa-model/raw/main/reports/Chipotle_FPA_Memo.pdf"><span class="ext">PDF</span><b>FP&amp;A memo</b><span>Written variance review, forecast, assumptions and sensitivities.</span><em>Download →</em></a>
 </div>
 <div class="chips"><span>FP&amp;A</span><span>3-Statement Modeling</span><span>Variance Analysis</span><span>Scenario &amp; Sensitivity Analysis</span><span>Forecasting</span><span>Excel</span><span>Power BI</span><span>DAX</span><span>Financial Storytelling</span></div>
 </section>
@@ -216,13 +232,5 @@ footer p+p{margin-top:8px}
 <p>Independent analysis of public information for educational purposes; not investment advice and not affiliated with Chipotle. Forecasts and the FY2025 budget are the author's own estimates.</p>
 </footer>
 </div>
-
-<div id="lb" aria-hidden="true"><img alt=""></div>
-<script>
-const lb=document.getElementById('lb'),li=lb.querySelector('img');
-document.querySelectorAll('figure img').forEach(i=>i.parentElement.addEventListener('click',()=>{li.src=i.src;li.alt=i.alt;lb.classList.add('on')}));
-lb.addEventListener('click',()=>lb.classList.remove('on'));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
-</script>
 </body>
 </html>
